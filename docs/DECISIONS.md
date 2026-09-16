@@ -44,3 +44,19 @@ decisión y el presupuesto aprobado deben anotarse aquí con fecha.
 Se eligió Supabase sobre una base de datos local porque su editor de tablas
 en el navegador funciona como panel de aprobación gratuito, sin necesidad de
 construir una interfaz propia.
+
+## 6. LLM para guiones: Gemini API (gratis) por defecto, con entrada manual como alternativa
+
+Google Gemini API (modelos Flash) es el proveedor por defecto: gratis, sin
+tarjeta, con margen de sobra para el volumen mensual de este proyecto (tier
+gratuito hasta 1.500 peticiones/día). Groq y OpenRouter quedan como
+alternativas gratuitas de respaldo si Gemini cambia sus límites. Cohere
+queda descartado pese a tener tier gratis: prohíbe uso comercial en sus
+términos, y este proyecto busca monetizar.
+
+`generate_script.py` es un paso opcional, no obligatorio: como la tabla
+`episodes` se puede editar a mano desde el panel de Supabase, cualquier mes
+se puede sustituir por escribir guiones manualmente (o generarlos en un chat
+gratuito como Claude.ai/Gemini/Le Chat) e insertarlos directamente con
+`status = pending_review` o `approved`. El resto del pipeline no distingue
+el origen del guion.

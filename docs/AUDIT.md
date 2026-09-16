@@ -7,7 +7,9 @@ filas nuevas si aparece una dependencia nueva.
 ## Cuentas y consolas externas — SOLO TÚ puedes hacer esto (Copilot no tiene acceso)
 
 - [ ] Crear proyecto en supabase.com (plan gratuito) → copiar `SUPABASE_URL`
-      y `SUPABASE_KEY` a los Secrets del repo de GitHub.
+      y la key de alto privilegio (`secret` si el proyecto es nuevo,
+      `service_role` si usa keys legacy — nunca `anon`/`publishable`) como
+      `SUPABASE_KEY` en los Secrets del repo de GitHub.
 - [ ] Ejecutar `db/schema.sql` en el SQL editor de Supabase.
 - [ ] Crear el repositorio en GitHub y subir este scaffold.
 - [ ] En Settings → Secrets and variables → Actions del repo, cargar todas
@@ -23,8 +25,11 @@ filas nuevas si aparece una dependencia nueva.
 - [ ] Decidir si se paga la API de X o se publica ahí manualmente (ver
       `docs/DECISIONS.md`, punto 4) — no es tarea de código hasta que se
       decida.
-- [ ] Elegir y contratar (o no) una API de LLM de pago para
-      `generate_script.py` (Claude, GPT...) y cargar la key en Secrets.
+- [ ] Crear una API key gratuita de Gemini en aistudio.google.com y
+      cargarla como `GEMINI_API_KEY` en Secrets (ver docs/DECISIONS.md
+      punto 6 -- es el proveedor por defecto, sin coste para el volumen de
+      este proyecto). Alternativa sin ningún setup: saltarse este paso y
+      escribir/insertar los guiones a mano en Supabase algunos meses.
 
 ## Código — esto lo construye Copilot en este repo
 

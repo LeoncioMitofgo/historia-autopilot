@@ -7,11 +7,17 @@ CONTRATO (no romper esto al implementar):
             title, hook, script, citations y status='pending_review'.
             Marcar el topic como used=true al terminar.
 
-TODO (Copilot): implementar la llamada real al proveedor de LLM elegido
-(ver .env.example para el nombre de la variable de entorno de la API key).
+TODO (Copilot): implementar la llamada real a Gemini API (GEMINI_API_KEY),
+el proveedor gratuito por defecto -- ver docs/DECISIONS.md punto 6 para las
+alternativas de respaldo (Groq, OpenRouter) si Gemini cambia sus límites.
 El guion debe seguir la estructura: gancho -> dato histórico verificable
 con su fuente -> pregunta de cierre. Ver docs/DECISIONS.md punto 1: son
 hechos reales documentados, no escenarios ficticios.
+
+NOTA: este script es opcional. Cualquier mes se puede saltar por completo
+insertando episodios a mano en la tabla `episodes` desde el editor de
+Supabase (ver docs/DECISIONS.md punto 6) -- el resto del pipeline no
+distingue el origen del guion.
 """
 import logging
 import os
