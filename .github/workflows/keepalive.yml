@@ -1,0 +1,27 @@
+name: Keepalive (evita que GitHub desactive los crons)
+
+# GitHub desactiva automáticamente los workflows programados de un repo si
+# no hay ningún commit en 60 días. Este workflow hace un commit trivial
+# cada 3 semanas para que generate.yml y publish.yml sigan corriendo solos.
+
+on:
+  schedule:
+    - cron: "0 0 */21 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/.keepalive
+          git config user.name "keepalive-bot"
+          git config user.email "actions@github.com"
+          git add .github/.keepalive
+          git commit -m "chore: keepalive" || echo "nada que commitear"
+          git push
